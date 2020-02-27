@@ -4,9 +4,11 @@ const engineer = require('./lib/engineer');
 const intern = require('./lib/intern');
 const manager = require('./lib/manager');
 
+// recursive inquirer to continue prompting user after selection
 inquirer.registerPrompt('recursive', require('inquirer-recursive'))
 
 inquirer.prompt([{
+    // general questions
     type: 'recursive',
     message: 'Add a new team member?',
     name: 'users',
@@ -34,8 +36,39 @@ inquirer.prompt([{
             message: 'New member\'s email address:',
             //insert test for email is required
         },
+        // role-specific follow-up questions
         {
-
-        }
+            when(response) {
+                if (response.role === 'Manager') {
+                    return true
+                } else { return false }
+            },
+            type: 'input',
+            name: 'roleResponse',
+            message: 'Office number:'
+                // insert test for office number required
+        },
+        {
+            when(response) {
+                if (response.role === 'Engineer') {
+                    return true
+                } else { return false }
+            },
+            type: 'input',
+            name: 'roleResponse',
+            message: 'Github username:'
+                // insert test for Github username required
+        },
+        {
+            when(response) {
+                if (response.role === 'Intern') {
+                    return true
+                } else { return false }
+            },
+            type: 'input',
+            name: 'roleResponse',
+            message: 'School name:'
+                // insert test for school name required
+        },
     ]
 }])
