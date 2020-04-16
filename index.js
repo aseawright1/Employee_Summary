@@ -1,8 +1,36 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const engineer = require('./lib/engineer');
-const intern = require('./lib/intern');
-const manager = require('./lib/manager');
+// const Employee = require('./lib/employee')
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
+const Manager = require('./lib/manager');
+const mainHTML = require('./templates/mainHTML');
+const engineerHTML = require('./templates/engineerHTML');
+const internHTML = require('./templates/internHTML');
+const managerHTML = require('./templates/managerHTML');
+
+function generateFullHTML(employees) {
+    let layout = ''
+    employees.forEach((newEmp) => {
+        // switch between roles
+        switch (newEmp.role) {
+            case 'engineer':
+                const newEng = new Engineer(newEmp.name, newEmp.id, newEmp.email, newEmp.roleResponse);
+                layout = layout + engineerHTML.generateHTML(newEng);
+                break;
+            case 'intern':
+                const newInt = new Intern(newEmp.name, newEmp.id, newEmp.email, newEmp.roleResponse);
+                layout = layout + internHTML.generateHTML(newInt);
+                break;
+            case 'manager':
+                const newMan = new Manager(newEmp.name, newEmp.id, newEmp.email, newEmp.roleResponse);
+                layout = layout + managerHTML.generateHTML(newMan);
+                break;
+        }
+    });
+    return layout;
+}
+
 
 // recursive inquirer to continue prompting user after selection
 inquirer.registerPrompt('recursive', require('inquirer-recursive'))
@@ -11,7 +39,7 @@ inquirer.prompt([{
     // general questions
     type: 'recursive',
     message: 'Add a new team member?',
-    name: 'users',
+    name: 'employees',
     prompts: [{
             type: 'list',
             message: 'New member job title:',
@@ -19,22 +47,16 @@ inquirer.prompt([{
             choices: ['Manager', 'Engineer', 'Intern']
         },
         {
-            type: 'input',
             name: 'name',
             message: 'New member\'s name:'
-                //insert test for name is required
         },
         {
-            type: 'input',
             name: 'id',
             message: 'New member\'s ID number:'
-                //insert test for invalid ID
         },
         {
-            type: 'input',
             name: 'email',
             message: 'New member\'s email address:',
-            //insert test for email is required
         },
         // role-specific follow-up questions
         {
@@ -43,10 +65,8 @@ inquirer.prompt([{
                     return true
                 } else { return false }
             },
-            type: 'input',
             name: 'roleResponse',
             message: 'Office number:'
-                // insert test for office number required
         },
         {
             when(response) {
@@ -54,10 +74,8 @@ inquirer.prompt([{
                     return true
                 } else { return false }
             },
-            type: 'input',
             name: 'roleResponse',
             message: 'Github username:'
-                // insert test for Github username required
         },
         {
             when(response) {
@@ -65,10 +83,19 @@ inquirer.prompt([{
                     return true
                 } else { return false }
             },
-            type: 'input',
             name: 'roleResponse',
             message: 'School name:'
-                // insert test for school name required
-        },
+
+        }
     ]
-}])
+}]).then((users) => {
+    let layout = generateFullHTML(users.employees);
+    layout = mainHTML.generateHTML(layout);
+    fs.writeFile('./output/YourTeam.html', layout, (err) => {
+        if (err) { return console.log(err) }
+        console.log('File created')
+    })
+}).catch(err => {
+    console.log(err);
+    process.exit(1)
+})
