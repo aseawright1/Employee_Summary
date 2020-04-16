@@ -4,7 +4,7 @@ const fs = require('fs');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-const mainHTML = require('./templates/mainHTML');
+const constructHTML = require('./templates/mainHTML');
 const engineerHTML = require('./templates/engineerHTML');
 const internHTML = require('./templates/internHTML');
 const managerHTML = require('./templates/managerHTML');
@@ -14,15 +14,15 @@ function generateFullHTML(employees) {
     employees.forEach((newEmp) => {
         // switch between roles
         switch (newEmp.role) {
-            case 'engineer':
+            case 'Engineer':
                 const newEng = new Engineer(newEmp.name, newEmp.id, newEmp.email, newEmp.roleResponse);
                 layout = layout + engineerHTML.generateHTML(newEng);
                 break;
-            case 'intern':
+            case 'Intern':
                 const newInt = new Intern(newEmp.name, newEmp.id, newEmp.email, newEmp.roleResponse);
                 layout = layout + internHTML.generateHTML(newInt);
                 break;
-            case 'manager':
+            case 'Manager':
                 const newMan = new Manager(newEmp.name, newEmp.id, newEmp.email, newEmp.roleResponse);
                 layout = layout + managerHTML.generateHTML(newMan);
                 break;
@@ -90,12 +90,9 @@ inquirer.prompt([{
     ]
 }]).then((users) => {
     let layout = generateFullHTML(users.employees);
-    layout = mainHTML.generateHTML(layout);
+    layout = constructHTML.generateHTML(layout);
     fs.writeFile('./output/YourTeam.html', layout, (err) => {
         if (err) { return console.log(err) }
         console.log('File created')
     })
-}).catch(err => {
-    console.log(err);
-    process.exit(1)
 })

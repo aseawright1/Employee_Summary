@@ -20,6 +20,6 @@ module.exports = {
                     <p class="border-box"><strong>GitHub</strong>: <br> ${data.github}</p>
                 </div>
             </div>
-        </div>`;
-    },
+        </div>`
+    }
 }

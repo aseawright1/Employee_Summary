@@ -1,5 +1,5 @@
 module.exports = {
-    generateHTML(data) {
+    generateHTML (data) {
         return `<!DOCTYPE html>
       <html lang="en">
         <head>
