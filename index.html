@@ -48,25 +48,25 @@
 
     <body>
         <div class="col mb-4">
-            <div class="card">
-                <div class="card-eng">
-                    <h1 class="emp-name">${data.name}</h1>
-                    <h1 class="emp-title">Engineer</h1>
-                    <img
-                    src="./assets/img/engineer.png"
-                    alt="Engineer"
-                    style="width: 100%;"
-                    sizes=""
-                    />
-                    <p class="border-box"><strong>ID</strong>: <br> ${data.id}</p>
-                    <p class="border-box"><strong>Email</strong>: <br> ${data.email}</p>
-                    <p class="border-box"><strong>GitHub</strong>: <br> ${data.github}</p>
+            <style>
+                p.border-box {background-color: rgb(250, 194, 194)}
+                .card {background-color: #F78888;}
+            </style>
+                <div class="card">
+                    <div class="card-eng">
+                        <h2 class="emp-name">${data.name}</h2>
+                        <h2 class="emp-title">Intern</h2>
+                        <img
+                        src="./assets/img/intern.png"
+                        alt="Intern"
+                        style="width: 100%;"
+                        sizes=""
+                        />
+                        <p class="border-box"><strong>ID</strong>: <br> ${data.id}</p>
+                        <p class="border-box"><strong>Email</strong>: <br> ${data.email}</p>
+                        <p class="border-box"><strong>University</strong>: <br> ${data.school}</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-    <style>
-        p.border-box {background-color: rgb(248, 230, 156)}
-        .card {background-color: #F3D250;}
-    </style>
 </html>

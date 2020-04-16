@@ -1,17 +1,21 @@
 module.exports = {
-    generateHTML(data) {
-        return `<div class="col mb-4">
-      <div class="card h-100 shadow rounded">
-        <div class="card-header">
-            <h2>${data.name}</h2>
-            <h2><i class="fas fa-mug-hot"> </i> Manager</h2>
+  generateHTML(data) {
+    return `
+    <div class="col mb-4">
+        <div class="card" style="background-color: #90CCF4;">
+            <div class="card-man">
+                <h2 class="emp-name">${data.name}</h2>
+                <h2 class="emp-title">Manager</h2>
+                <img
+                src="../assets/img/manager.png"
+                alt="Manager"
+                style="width: 100%;"
+                />
+                <p class="border-box"  style="background-color: rgb(196, 227, 248)"><strong>ID</strong>: <br> ${data.id}</p>
+                <p class="border-box"  style="background-color: rgb(196, 227, 248)"><strong>Email</strong>: <br> ${data.email}</p>
+                <p class="border-box"  style="background-color: rgb(196, 227, 248)"><strong>Office Number</strong>: <br> ${data.office}</p>
+            </div>
         </div>
-        <div class="card-body">
-        <h5 class="card-title border border-dark p-2">ID: ${data.id}</h5>
-        <h5 class="card-title border border-dark p-2">Email: ${data.email}</h5>
-        <h5 class="card-title border border-dark p-2">Ofice #: ${data.officeNumber}</h5>
-        </div>
-      </div>
-    </div>`;
-    },
+    </div>`
+  }
 }

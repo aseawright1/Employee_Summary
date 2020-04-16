@@ -11,11 +11,11 @@ module.exports = {
             <title>My Team</title>
         </head>
         <body>
-            <div class="header align-items-center justify-content-center">
-                <h1>The Squad</h1>
+            <div class="header justify-content-center">
+                <h1>The Dream Team</h1>
             </div>
             <div class="container">
-                <div id="main" class="row row-cols-md-3">
+                <div id="main" class="row row-cols-lg-3 justify-content-center">
                 ${data}
                 </div>
             </div>
