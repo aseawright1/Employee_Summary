@@ -1,4 +1,4 @@
-# 8.Employee_Summary
+# Employee_Summary
 ![Webpage](/assets/img/webpage.png)
 
 ## What this project is
